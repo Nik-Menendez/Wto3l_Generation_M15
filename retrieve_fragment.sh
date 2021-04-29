@@ -10,7 +10,7 @@ cd CMSSW_10_6_19_patch2/src
 eval `scram runtime -sh`
 
 # Download fragment from McM
-curl -s -k https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_fragment/SMP-RunIISummer20UL17wmLHEGEN-00053 --retry 3 --create-dirs -o Configuration/GenProduction/python/Wto3l-RunIISummer20UL17wmLHEGEN-fragment.py
+curl -s -k https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_fragment/SMP-RunIISummer20UL17wmLHEGEN-00053 --retry 3 --create-dirs -o Configuration/GenProduction/python/fragment-Wto3l-RunIISummer20UL17wmLHEGEN.py
 
 cd -
-cp Wto3l-RunIISummer20UL17wmLHEGEN-fragment.py CMSSW_10_6_19_patch2/src/Configuration/GenProduction/python/
+cp fragment-Wto3l-RunIISummer20UL17wmLHEGEN.py CMSSW_10_6_19_patch2/src/Configuration/GenProduction/python/

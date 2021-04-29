@@ -1,5 +1,7 @@
 EVENTS=100
 
+source retrieve_fragment.sh
+
 export SCRAM_ARCH=slc7_amd64_gcc700
 
 source /cvmfs/cms.cern.ch/cmsset_default.sh
@@ -16,13 +18,19 @@ cd ../..
 
 # ------------------- GENERATE LHE-GEN
 
+echo "--------------------- LHE-GEN ----------------------"
+
 # cmsDriver command
-cmsDriver.py Configuration/GenProduction/python/Wto3l-RunIISummer20UL17wmLHEGEN-fragment.py --python_filename Wto3l-RunIISummer20UL17wmLHEGEN_cfg.py --eventcontent RAWSIM,LHE --customise Configuration/DataProcessing/Utils.addMonitoring --datatier GEN,LHE --fileout file:Wto3l-RunIISummer20UL17wmLHEGEN.root --conditions 106X_mc2017_realistic_v6 --beamspot Realistic25ns13TeVEarly2017Collision --customise_commands process.source.numberEventsInLuminosityBlock="cms.untracked.uint32(100)" --step LHE,GEN --geometry DB:Extended --era Run2_2017 --no_exec --mc -n $EVENTS
+cmsDriver.py Configuration/GenProduction/python/fragment-Wto3l-RunIISummer20UL17wmLHEGEN.py --python_filename Wto3l-RunIISummer20UL17wmLHEGEN_cfg.py --eventcontent RAWSIM,LHE --customise Configuration/DataProcessing/Utils.addMonitoring --datatier GEN,LHE --fileout file:Wto3l-RunIISummer20UL17wmLHEGEN.root --conditions 106X_mc2017_realistic_v6 --beamspot Realistic25ns13TeVEarly2017Collision --customise_commands process.source.numberEventsInLuminosityBlock="cms.untracked.uint32(100)" --step LHE,GEN --geometry DB:Extended --era Run2_2017 --no_exec --mc -n $EVENTS
 
 # Run generated config
 cmsRun -e -j Wto3l-RunIISummer20UL17wmLHEGEN_report.xml Wto3l-RunIISummer20UL17wmLHEGEN_cfg.py
 
- ------------------- GENERATE SIM
+rm Wto3l-RunIISummer20UL17wmLHEGEN_report.xml Wto3l-RunIISummer20UL17wmLHEGEN_cfg.py
+rm -rf CMSSW*
+# ------------------- GENERATE SIM
+
+echo "--------------------- SIM ----------------------"
 
 export SCRAM_ARCH=slc7_amd64_gcc700
 
@@ -44,7 +52,11 @@ cmsDriver.py  --python_filename Wto3l-RunIISummer20UL17SIM_cfg.py --eventcontent
 # Run generated config
 cmsRun -e -j Wto3l-RunIISummer20UL17SIM_report.xml Wto3l-RunIISummer20UL17SIM_cfg.py
 
+rm Wto3l-RunIISummer20UL17SIM_report.xml Wto3l-RunIISummer20UL17SIM_cfg.py Wto3l-RunIISummer20UL17wmLHEGEN.root Wto3l-RunIISummer20UL17wmLHEGEN_inLHE.root
+rm -rf CMSSW*
 # ------------------- RUN DIGI-Premix
+
+echo "--------------------- DIGI-Premix ----------------------"
 
 export SCRAM_ARCH=slc7_amd64_gcc700
 
@@ -66,7 +78,11 @@ cmsDriver.py  --python_filename Wto3l-RunIISummer20UL17DIGIPremix_cfg.py --event
 # Run generated config
 cmsRun -e -j Wto3l-RunIISummer20UL17DIGIPremix_report.xml Wto3l-RunIISummer20UL17DIGIPremix_cfg.py
 
+rm Wto3l-RunIISummer20UL17DIGIPremix_report.xml Wto3l-RunIISummer20UL17DIGIPremix_cfg.py Wto3l-RunIISummer20UL17SIM.root
+rm -rf CMSSW*
 # ------------------- Run HLT
+
+echo "--------------------- HLT ----------------------"
 
 export SCRAM_ARCH=slc7_amd64_gcc630
 
@@ -88,7 +104,11 @@ cmsDriver.py  --python_filename Wto3l-RunIISummer20UL17HLT_cfg.py --eventcontent
 # Run generated config
 cmsRun -e -j Wto3l-RunIISummer20UL17HLT_report.xml Wto3l-RunIISummer20UL17HLT_cfg.py
 
+rm Wto3l-RunIISummer20UL17HLT_report.xml Wto3l-RunIISummer20UL17HLT_cfg.py Wto3l-RunIISummer20UL17DIGIPremix.root
+rm -rf CMSSW*
 # ------------------- Run RECO
+
+echo "--------------------- RECO ----------------------"
 
 export SCRAM_ARCH=slc7_amd64_gcc700
 
@@ -110,7 +130,11 @@ cmsDriver.py  --python_filename Wto3l-RunIISummer20UL17RECO_cfg.py --eventconten
 # Run generated config
 cmsRun -e -j Wto3l-RunIISummer20UL17RECO_report.xml Wto3l-RunIISummer20UL17RECO_cfg.py
 
+rm Wto3l-RunIISummer20UL17RECO_report.xml Wto3l-RunIISummer20UL17RECO_cfg.py Wto3l-RunIISummer20UL17HLT.root
+rm -rf CMSSW*
 # ------------------- Run MiniAOD
+
+echo "--------------------- MiniAOD ----------------------"
 
 export SCRAM_ARCH=slc7_amd64_gcc700
 
@@ -132,7 +156,11 @@ cmsDriver.py  --python_filename Wto3l-RunIISummer20UL17MiniAODv2_cfg.py --eventc
 # Run generated config
 cmsRun -e -j Wto3l-RunIISummer20UL17MiniAODv2_report.xml Wto3l-RunIISummer20UL17MiniAODv2_cfg.py
 
+rm Wto3l-RunIISummer20UL17MiniAODv2_report.xml Wto3l-RunIISummer20UL17MiniAODv2_cfg.py Wto3l-RunIISummer20UL17RECO.root
+rm -rf CMSSW*
 # ------------------- Run NanoAOD
+
+echo "--------------------- NanoAOD ----------------------"
 
 export SCRAM_ARCH=slc7_amd64_gcc700
 
@@ -153,3 +181,6 @@ cmsDriver.py  --python_filename Wto3l-RunIISummer20UL17NanoAODv2_cfg.py --eventc
 
 # Run generated config
 cmsRun -e -j Wto3l-RunIISummer20UL17NanoAODv2_report.xml Wto3l-RunIISummer20UL17NanoAODv2_cfg.py
+
+rm Wto3l-RunIISummer20UL17NanoAODv2_report.xml Wto3l-RunIISummer20UL17NanoAODv2_cfg.py Wto3l-RunIISummer20UL17MiniAODv2.root
+rm -rf CMSSW*
