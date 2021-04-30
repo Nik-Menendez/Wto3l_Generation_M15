@@ -1,4 +1,4 @@
-EVENTS=100
+EVENTS=500
 
 source retrieve_fragment.sh
 
