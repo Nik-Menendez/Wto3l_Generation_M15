@@ -13,7 +13,7 @@ config.JobType.scriptExe = 'produce_Wto3l_Zp_M15.sh'
 config.JobType.disableAutomaticOutputCollection = True
 config.JobType.outputFiles = ['Wto3l-RunIISummer20UL17NanoAODv2.root']
 config.JobType.inputFiles = ['produce_Wto3l_Zp_M15.sh','retrieve_fragment.sh','fragment-Wto3l-RunIISummer20UL17wmLHEGEN.py','Zp_to_3mu_M15_slc7_amd64_gcc700_CMSSW_10_6_19_tarball.tar.xz','FrameworkJobReport.xml']
-config.JobType.maxMemoryMB = 5000
+config.JobType.maxMemoryMB = 2500
 
 config.Data.splitting = 'EventBased'
 config.Data.unitsPerJob = 1

@@ -1,4 +1,5 @@
 EVENTS=500
+SEED=$RANDOM
 
 source retrieve_fragment.sh
 
@@ -21,7 +22,7 @@ cd ../..
 echo "--------------------- LHE-GEN ----------------------"
 
 # cmsDriver command
-cmsDriver.py Configuration/GenProduction/python/fragment-Wto3l-RunIISummer20UL17wmLHEGEN.py --python_filename Wto3l-RunIISummer20UL17wmLHEGEN_cfg.py --eventcontent RAWSIM,LHE --customise Configuration/DataProcessing/Utils.addMonitoring --datatier GEN,LHE --fileout file:Wto3l-RunIISummer20UL17wmLHEGEN.root --conditions 106X_mc2017_realistic_v6 --beamspot Realistic25ns13TeVEarly2017Collision --customise_commands process.source.numberEventsInLuminosityBlock="cms.untracked.uint32(100)" --step LHE,GEN --geometry DB:Extended --era Run2_2017 --no_exec --mc -n $EVENTS
+cmsDriver.py Configuration/GenProduction/python/fragment-Wto3l-RunIISummer20UL17wmLHEGEN.py --python_filename Wto3l-RunIISummer20UL17wmLHEGEN_cfg.py --eventcontent RAWSIM,LHE --customise Configuration/DataProcessing/Utils.addMonitoring --datatier GEN,LHE --fileout file:Wto3l-RunIISummer20UL17wmLHEGEN.root --conditions 106X_mc2017_realistic_v6 --beamspot Realistic25ns13TeVEarly2017Collision --customise_commands process.source.numberEventsInLuminosityBlock="cms.untracked.uint32(100)" --customise_commands process.RandomNumberGeneratorService.generator.initialSeed="cms.untracked.uint32($SEED)" --step LHE,GEN --geometry DB:Extended --era Run2_2017 --no_exec --mc -n $EVENTS
 
 # Run generated config
 cmsRun -e -j Wto3l-RunIISummer20UL17wmLHEGEN_report.xml Wto3l-RunIISummer20UL17wmLHEGEN_cfg.py
