@@ -13,4 +13,9 @@ eval `scram runtime -sh`
 curl -s -k https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_fragment/SMP-RunIISummer20UL17wmLHEGEN-00053 --retry 3 --create-dirs -o Configuration/GenProduction/python/fragment-Wto3l-RunIISummer20UL17wmLHEGEN.py
 
 cd -
-cp fragment-Wto3l-RunIISummer20UL17wmLHEGEN.py CMSSW_10_6_19_patch2/src/Configuration/GenProduction/python/
+Mass=$1
+if $2 == "1":
+	file="Fragments/WpTo3l_M${Mass}_fragment.py"
+else:
+	file="Fragments/WmTo3l_M${Mass}_fragment.py"
+cp $file CMSSW_10_6_19_patch2/src/Configuration/GenProduction/python/fragment-Wto3l-RunIISummer20UL17wmLHEGEN.py

@@ -1,7 +1,21 @@
 EVENTS=500
 SEED=$RANDOM
+mass=""
+isPos=""
 
-source retrieve_fragment.sh
+for i in "$@"
+do
+case $i in
+	Mass=*)
+	mass="${i#*=}"
+	;;
+	isP=*)
+	isPos="${i#*=}"
+	;;
+esac
+done
+
+source retrieve_fragment.sh $mass $isPos
 
 export SCRAM_ARCH=slc7_amd64_gcc700
 
