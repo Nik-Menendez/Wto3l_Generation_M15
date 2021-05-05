@@ -1,9 +1,7 @@
 import FWCore.ParameterSet.Config as cms
 
-Mass=30
-
 externalLHEProducer = cms.EDProducer("ExternalLHEProducer",
-    args = cms.vstring('../Gridpacks/WmTo3l_M'+Mass+'_tarball.tar.xz'),
+    args = cms.vstring('../Gridpacks/WmTo3l_M30_tarball.tar.xz'),
     nEvents = cms.untracked.uint32(500),
     numberOfParameters = cms.uint32(1),
     outputFile = cms.string('cmsgrid_final.lhe'),

@@ -1,6 +1,6 @@
 Masses=("4" "5" "10" "15" "30" "60")
 
-for Mass in ${Masses}
+for Mass in "${Masses[@]}"
 do
 	request="WpTo3l_M$Mass"
 	output="WpTo3l_M$Mass"

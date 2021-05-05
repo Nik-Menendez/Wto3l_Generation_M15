@@ -14,8 +14,11 @@ curl -s -k https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_fragment/SMP
 
 cd -
 Mass=$1
-if $2 == "1":
+if [[ $2 -eq 1 ]]
+then
 	file="Fragments/WpTo3l_M${Mass}_fragment.py"
-else:
+else
 	file="Fragments/WmTo3l_M${Mass}_fragment.py"
+fi
+
 cp $file CMSSW_10_6_19_patch2/src/Configuration/GenProduction/python/fragment-Wto3l-RunIISummer20UL17wmLHEGEN.py
